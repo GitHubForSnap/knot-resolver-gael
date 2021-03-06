@@ -41,6 +41,8 @@ parts:
       'libdnssec.so.8': '/usr/lib'
       'libknot.so.11.0.0': '/usr/lib'
       'libzscanner.so.3.0.0': '/usr/lib'
+    stage:
+      - /usr/lib/*
     
   kresd:
     plugin: dump
