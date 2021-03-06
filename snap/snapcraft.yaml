@@ -20,6 +20,8 @@ license: "GPL-3.0"
 
 apps:
   kresd:
+    command: kresd
+    daemon: simple
     environment:
       HOME: ${SNAP_USER_COMMON}
       XDG_CONFIG_HOME: ${SNAP_USER_COMMON}
