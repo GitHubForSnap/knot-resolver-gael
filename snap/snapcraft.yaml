@@ -3,11 +3,11 @@ base: core20
 adopt-info: app
 summary: Knot Resolver
 description: |
-Knot Resolver is a caching full resolver implementation written in C and LuaJIT, both a resolver library and a daemon. The core architecture is tiny and efficient, and provides a foundation and a state-machine like API for extensions. There are three modules built-in - iterator, validator, cache, and a few more are loaded by default. Most of the rich features are written in Lua(JIT) and C. Batteries are included, but optional.
-The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with low memory footprint make it a great personal DNS resolver or a research tool to tap into DNS data. TL;DR it's the OpenResty of DNS.
-Strong filtering rules, and auto-configuration with etcd make it a great large-scale resolver solution.
-The server adopts a different scaling strategy than the rest of the DNS recursors - no threading, shared-nothing architecture (except MVCC cache that may be shared) that allows you to pin instances on available CPU cores and grow by self-replication. You can start and stop additional nodes depending on the contention without downtime.
-It also has strong support for DNS over TCP, notably TCP Fast-Open, query pipelining and deduplication, and response reordering.
+  Knot Resolver is a caching full resolver implementation written in C and LuaJIT, both a resolver library and a daemon. The core architecture is tiny and efficient, and provides a foundation and a state-machine like API for extensions. There are three modules built-in - iterator, validator, cache, and a few more are loaded by default. Most of the rich features are written in Lua(JIT) and C. Batteries are included, but optional.
+  The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with low memory footprint make it a great personal DNS resolver or a research tool to tap into DNS data. TL;DR it's the OpenResty of DNS.
+  Strong filtering rules, and auto-configuration with etcd make it a great large-scale resolver solution.
+  The server adopts a different scaling strategy than the rest of the DNS recursors - no threading, shared-nothing architecture (except MVCC cache that may be shared) that allows you to pin instances on available CPU cores and grow by self-replication. You can start and stop additional nodes depending on the contention without downtime.
+  It also has strong support for DNS over TCP, notably TCP Fast-Open, query pipelining and deduplication, and response reordering.
 
 grade: stable 
 confinement: strict
