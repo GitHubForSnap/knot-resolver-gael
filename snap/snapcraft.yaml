@@ -20,8 +20,6 @@ license: "GPL-3.0"
 
 apps:
   kresd:
-#    command: syncthingd.sh
-#    daemon: simple
     environment:
       HOME: ${SNAP_USER_COMMON}
       XDG_CONFIG_HOME: ${SNAP_USER_COMMON}
@@ -32,25 +30,14 @@ apps:
     - removable-media
 
 parts:
-#  launcher:
-    # See 'snapcraft plugins'
-#    plugin: dump
-#    source: ./launcher
-#    stage:
-#      - syncthingd.sh
-
   app:
     plugin: dump
     source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/knot-resolver_5.3.0-cznic.1_amd64.deb
-#    source-tag: v1.14.0
     source-type: deb
-#    build-packages:
-#      - build-essential
     override-build: |
       COUNT=1
-      VERSION="5.3.0+snap1"
+      VERSION=5.3.0+snap1
       ARCH=amd64
-      #
       echo "Building Knot Resolver..."
       echo "VERSION: ${VERSION}"
       echo "ARCH   : ${ARCH}"
