@@ -23,7 +23,7 @@ license: "GPL-3.0"
 
 apps:
   kresd:
-    command: kresd
+    command: kresd.sh /usr/sbin/kresd -c /usr/lib/knot-resolver/distro-preconfig.lua -c /etc/knot-resolver/kresd.conf -n
     daemon: simple
     environment:
       HOME: ${SNAP_USER_COMMON}
@@ -34,6 +34,12 @@ apps:
     - network-bind
 
 parts:
+  launcher:
+    plugin: dump
+    source: snap/local/launcher
+    stage:
+      - kresd.sh
+
   libs:
     plugin: dump
     source: snap/local/libs
