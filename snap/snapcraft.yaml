@@ -46,14 +46,11 @@ parts:
     plugin: dump
     source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/knot-resolver_5.3.0-cznic.1_amd64.deb
     source-type: deb
-    build-packages:
+    stage-packages:
     - libnghttp2-14
-    - libdnssec.so.8
-    - libknot.so.11
     - liblmdb0
     - libluajit-5.1-2
     - libuv1
-    - libzscanner.so.3
     override-build: |
       COUNT=1
       VERSION=5.3.0+snap1
