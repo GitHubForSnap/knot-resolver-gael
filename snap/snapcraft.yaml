@@ -32,10 +32,18 @@ apps:
     - removable-media
 
 parts:
-  app:
+  kresd:
     plugin: dump
     source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/knot-resolver_5.3.0-cznic.1_amd64.deb
     source-type: deb
+    stage-packages:
+    - libnghttp2-14
+    - libdnssec.so.8
+    - libknot.so.11
+    - liblmdb.so.0
+    - libluajit-5.1.so.2
+    - libuv.so.1
+    - libzscanner.so.3
     override-build: |
       COUNT=1
       VERSION=5.3.0+snap1
@@ -44,25 +52,3 @@ parts:
       echo "VERSION: ${VERSION}"
       echo "ARCH   : ${ARCH}"
       echo "-----------------------"
-      snapcraftctl set-version "${VERSION}"
-      snapcraftctl build
-
-  # This part removes all the files in this snap which already exist in
-  # connected content and base snaps. Since these files will be available
-  # at runtime from the content and base snaps, they do not need to be
-  # included in this snap itself.
-  #
-  # More info: https://forum.snapcraft.io/t/reducing-the-size-of-desktop-snaps/17280#heading--cleanup-part
-  #
-  cleanup:
-    after:  # Make this part run last; list all your other parts here
-      - app
-    plugin: nil
-    build-snaps:  # List all content-snaps and base snaps you're using here
-      - core20
-    override-prime: |
-      set -eux
-      for snap in "core20"; do  # List all content-snaps and base snaps you're using here
-          cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
-      done
-
