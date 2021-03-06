@@ -32,6 +32,14 @@ apps:
     - removable-media
 
 parts:
+  lib:
+    plugin: dump
+    source: https://archlinux.org/packages/community/x86_64/knot/download/
+    organize:
+    - "usr/lib/libdnssec.so.8.0.0": /lib
+    - "usr/lib/libknot.so.11.0.0": /lib
+    - "usr/lib/libzscanner.so.3.0.0": /lib
+    
   kresd:
     plugin: dump
     source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/knot-resolver_5.3.0-cznic.1_amd64.deb
@@ -40,9 +48,9 @@ parts:
     - libnghttp2-14
     - libdnssec.so.8
     - libknot.so.11
-    - liblmdb.so.0
-    - libluajit-5.1.so.2
-    - libuv.so.1
+    - liblmdb0
+    - libluajit-5.1-2
+    - libuv1
     - libzscanner.so.3
     override-build: |
       COUNT=1
