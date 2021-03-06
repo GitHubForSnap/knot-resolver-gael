@@ -42,7 +42,7 @@ parts:
       'libknot.so.11.0.0': '/usr/lib'
       'libzscanner.so.3.0.0': '/usr/lib'
     stage:
-      - /usr/lib/*
+      - usr/lib/*
     
   kresd:
     plugin: dump
