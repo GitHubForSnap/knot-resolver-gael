@@ -1,2 +1,3 @@
-Libraries taken from Arch packages
-https://archlinux.org/packages/community/x86_64/knot/
+Knot libraries taken from Arch packages	https://archlinux.org/packages/community/x86_64/knot/
+Libbpf libraries taken from Arch packages	https://archlinux.org/packages/extra/x86_64/libbpf/
+Lmdb libraries taken from Arch packages	https://archlinux.org/packages/extra/x86_64/lmdb/
