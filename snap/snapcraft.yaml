@@ -12,7 +12,7 @@ description: |
   The server adopts a different scaling strategy than the rest of the DNS recursors - no threading, shared-nothing architecture (except MVCC cache that may be shared) that allows you to pin instances on available CPU cores and grow by self-replication. You can start and stop additional nodes depending on the contention without downtime.
   It also has strong support for DNS over TCP, notably TCP Fast-Open, query pipelining and deduplication, and response reordering.
 
-grade: stable 
+grade: stable
 confinement: strict
 
 architectures:
@@ -54,6 +54,20 @@ parts:
     source-type: deb
     stage-packages:
     - libnghttp2-14
-    - libluajit-5.1-2
     - libuv1
+    filesets:
+      exclude:
+        - -etc/ld.so.conf.d
+        - -lib/x86_64-linux-gnu
+        - -lib64
+        - -usr/lib/tmpfiles.d
+        - -usr/lib/x86_64-linux-gnu
+        - -usr/share/doc
+        - -usr/share/lintian
+        - -usr/share/man
+      prime:
+        - libnghttp2-14
+        - libuv1
+        - $exclude
+    after: [libs]
 
