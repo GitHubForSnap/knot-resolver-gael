@@ -76,10 +76,17 @@ parts:
     - dns-root-data
     override-build: |
       snapcraftctl build
+
       rm $SNAPCRAFT_PART_INSTALL/lib/systemd/system/kresd.service
+
       cd $SNAPCRAFT_PART_INSTALL/usr/lib/x86_64-linux-gnu
       ln -sf liblmdb.so.0.0.0 liblmdb.so
       ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
+
+    override-prime: |
+      snapcraftctl prime
+
+      cp $SNAPCRAFT_PRIME/etc/knot-resolver/kresd.conf $SNAPCRAFT_PRIME
 
     after: [knot, libdnssec, libzscanner]
 
