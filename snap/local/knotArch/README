@@ -1,5 +1,0 @@
-* Download Archlinux knot DNS package (https://archlinux.org/packages/community/x86_64/knot/download/)
-* Unpack the archive
-* cd knotArch
-* tar cvf ../knotArch.tar .
-* Upload knotArch.tar

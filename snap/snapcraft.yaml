@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.3.0+snap1
+version: 5.3.0+snap2
 base: core20
 summary: Knot Resolver
 description: |
@@ -16,8 +16,7 @@ grade: stable
 confinement: strict
 
 architectures:
-- build-on: [amd64]
-  run-on: [amd64]
+- build-on: [amd64, arm64, armhf]
 
 license: "GPL-3.0"
 
@@ -40,28 +39,28 @@ apps:
 parts:
   launcher:
     plugin: dump
-    source: snap/local/launcher
+    source: local/launcher
     stage:
       - kresd.sh
 
-  knot:
+  libknot:
     plugin: dump
-    source: snap/local/knotArch/knotArch.tar
-    source-type: tar
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libknot11_3.0.4-1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source-type: deb
 
   libdnssec:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/libdnssec8_3.0.4-1_amd64.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libdnssec8_3.0.4-1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
 
   libzscanner:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/libzscanner3_3.0.4-1_amd64.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner3_3.0.4-1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/amd64/knot-resolver_5.3.0-cznic.1_amd64.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.3.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
     - libnghttp2-14
@@ -75,8 +74,8 @@ parts:
 
       rm $SNAPCRAFT_PART_INSTALL/lib/systemd/system/kresd.service
 
-      cd $SNAPCRAFT_PART_INSTALL/usr/lib/x86_64-linux-gnu
+      cd $SNAPCRAFT_PART_INSTALL/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
       ln -sf liblmdb.so.0.0.0 liblmdb.so
       ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
 
-    after: [knot, libdnssec, libzscanner]
+    after: [libknot, libdnssec, libzscanner]
