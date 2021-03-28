@@ -16,7 +16,7 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 
 **2021-03-28**
 
-* First release of knot-resolver-gael v5.3.0 on arm64 & armhf architectures
+* First release of knot-resolver-gael v5.3.0 on arm64 architecture
 * Caveat: I don't have the hardware to test it properly
 
 **2021-03-14**
