@@ -14,6 +14,10 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Restart Knot Resolver
 `sudo snap restart knot-resolver-gael.kresd`
 
+**2021-04-02**
+
+* Update to v5.3.1
+
 **2021-03-28**
 
 * First release of knot-resolver-gael v5.3.0 on arm64 architecture

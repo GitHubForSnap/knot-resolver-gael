@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.3.0+snap2
+version: 5.3.1+snap1
 base: core20
 summary: Knot Resolver
 description: |
@@ -46,22 +46,22 @@ parts:
 
   libknot:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libknot11_3.0.4-1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libknot11_3.0.5-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
 
   libdnssec:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libdnssec8_3.0.4-1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libdnssec8_3.0.5-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
 
   libzscanner:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner3_3.0.4-1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner3_3.0.5-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.3.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.3.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
     - libnghttp2-14
