@@ -14,7 +14,39 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Restart Knot Resolver
 `sudo snap restart knot-resolver-gael.kresd`
 
-**2021-04-02**
+**Deny domain resolution (refreshed every 4hrs)**
+
+* Enter hosts lists URLs (optional)
+`sudo vi /var/snap/knot-resolver-gael/common/policies/deny_hosts.url`
+
+```
+   # Sample deny host files URLs
+   
+   https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts;showintro=0
+   https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+   https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+   http://sysctl.org/cameleon/hosts
+```
+
+* Enter domains lists URLs (optional)
+`sudo vi /var/snap/knot-resolver-gael/common/policies/deny_domains.url`
+
+```
+   # Sample deny domains URLs
+   
+   https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt
+   https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+   https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+   https://v.firebog.net/hosts/AdguardDNS.txt
+   https://v.firebog.net/hosts/Easyprivacy.txt
+```
+
+* Add the deny policy list to kresd.conf
+`sudo vi /var/snap/knot-resolver-gael/current/kresd.conf`
+
+   policy.add(policy.rpz(policy.DENY, '/var/snap/knot-resolver-gael/common/policies/deny_policy.rpz',true))
+
+**2021-04-04**
 
 * Update to v5.3.1
 

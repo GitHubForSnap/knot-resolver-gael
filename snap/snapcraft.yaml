@@ -37,12 +37,25 @@ apps:
     - network
     - network-bind
 
+  deny-policy:
+    command: policies/deny_policy.sh
+    daemon: simple
+    timer: 00:00-24:00/6
+    plugs:
+      - network
+
 parts:
   launcher:
     plugin: dump
     source: local/launcher
     stage:
       - kresd.sh
+
+  policies:
+    plugin: dump
+    source: local
+    stage:
+      - policies/deny_policy.sh
 
   libknot:
     plugin: dump
