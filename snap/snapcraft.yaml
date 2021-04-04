@@ -56,8 +56,6 @@ parts:
     source: local
     stage:
       - policies/deny_policy.sh
-    stage-packages:
-      - wget
 
   libknot:
     plugin: dump
@@ -85,6 +83,7 @@ parts:
     - libluajit-5.1-2
     - libbpfcc
     - dns-root-data
+    - wget
     override-build: |
       snapcraftctl build
 
