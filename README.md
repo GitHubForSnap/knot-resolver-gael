@@ -44,7 +44,9 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Add the deny policy list to kresd.conf
 `sudo vi /var/snap/knot-resolver-gael/current/kresd.conf`
 
+```
    policy.add(policy.rpz(policy.DENY, '/var/snap/knot-resolver-gael/common/policies/deny_policy.rpz',true))
+```
 
 **2021-04-04**
 
