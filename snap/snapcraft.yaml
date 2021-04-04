@@ -54,6 +54,9 @@ parts:
   policies:
     plugin: dump
     source: local
+    stage-packages:
+      - wget
+      - lua-cqueues
     stage:
       - policies/deny_policy.sh
 
