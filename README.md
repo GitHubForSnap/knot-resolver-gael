@@ -14,7 +14,10 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Restart Knot Resolver
 `sudo snap restart knot-resolver-gael.kresd`
 
-**Deny domain resolution (refreshed every 4hrs)**
+* Read the logs
+`journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
+
+**Deny domain resolution (refreshed every 4 hrs)**
 
 * Enter hosts lists URLs (optional)
 `sudo vi /var/snap/knot-resolver-gael/common/policies/deny_hosts.url`
@@ -41,6 +44,12 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
    https://v.firebog.net/hosts/Easyprivacy.txt
 ```
 
+* Restart deny policy
+`sudo snap restart knot-resolver-gael.deny-policy`
+
+* Read the logs
+`journalctl --follow --lines 30 -u snap.knot-resolver-gael.deny-policy`
+
 * Add the deny policy list to kresd.conf
 `sudo vi /var/snap/knot-resolver-gael/current/kresd.conf`
 
@@ -48,9 +57,16 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
    policy.add(policy.rpz(policy.DENY, '/var/snap/knot-resolver-gael/common/policies/deny_policy.rpz',true))
 ```
 
-**2021-04-04**
+* Restart Knot Resolver
+`sudo snap restart knot-resolver-gael.kresd`
 
-* Update to v5.3.1
+* Read the logs
+`journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
+
+**2021-04-11**
+
+* Updated to v5.3.1
+* Added deny list with Response Policy Zone (RPZ) refreshed every 4 hrs
 
 **2021-03-28**
 

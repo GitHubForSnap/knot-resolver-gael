@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.3.1+snap1
+version: 5.3.1
 base: core20
 summary: Knot Resolver
 description: |
@@ -22,23 +22,28 @@ architectures:
 license: "GPL-3.0"
 
 layout:
-  /usr/lib/knot-resolver:
+  /usr/lib/knot-resolver:               # Needed to workaround absolute paths in Knot Resolver
     bind: $SNAP/usr/lib/knot-resolver
-  /usr/share/dns:
+  /usr/share/dns:                       # Needed to workaround absolute paths in Knot Resolver
     bind: $SNAP/usr/share/dns
-  /var/cache:
+  /var/cache:                           # Needed to enable write access to the cache
     bind: $SNAP_DATA/var/cache
+  /etc/wgetrc:                          # Needed by wget
+    bind-file: $SNAP/etc/wgetrc
 
 apps:
   kresd:
     command: kresd.sh
     daemon: simple
+    environment:
+      LUA_PATH: $SNAP/usr/lib/knot-resolver/?.lua;$SNAP/usr/lib/knot-resolver/?/init.lua;$SNAP/./?.lua;$SNAP/usr/share/luajit-2.1.0-beta3/?.lua;$SNAP/usr/share/lua/5.1/?.lua;$SNAP/usr/share/lua/5.1/?/init.lua
+      LUA_CPATH: $SNAP/usr/lib/knot-resolver/?.so;$SNAP/./?.so;$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/?.so;$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/lua/5.1/?.so
     plugs:
     - network
     - network-bind
 
   deny-policy:
-    command: policies/deny_policy.sh
+    command: policies/deny_policy.sh    # Rebuild the deny list every 4 hrs
     daemon: simple
     timer: 00:00-24:00/6
     plugs:
@@ -54,9 +59,6 @@ parts:
   policies:
     plugin: dump
     source: local
-    stage-packages:
-      - wget
-      - lua-cqueues
     stage:
       - policies/deny_policy.sh
 
@@ -86,7 +88,8 @@ parts:
     - libluajit-5.1-2
     - libbpfcc
     - dns-root-data
-    - wget
+    - wget                              # Needed by deny-policy
+    - lua-cqueues                       # Needed by deny-policy
     override-build: |
       snapcraftctl build
 

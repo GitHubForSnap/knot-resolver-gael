@@ -49,5 +49,4 @@ echo "$DENY_POLICY has been updated"
 rm "$TMP_HOSTS"
 rm "$TMP_DOMAINS"
 
-exit 0;
-
+exit 0
