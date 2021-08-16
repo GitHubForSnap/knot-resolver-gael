@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.4.0
+version: 5.4.0-dnstap
 base: core20
 summary: Knot Resolver
 description: |
@@ -41,6 +41,7 @@ apps:
     plugs:
     - network
     - network-bind
+    - home
 
   deny-policy:
     command: policies/deny_policy.sh    # Rebuild the deny list every 4 hrs
@@ -77,6 +78,11 @@ parts:
     source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner3_3.0.5-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
 
+  dnstap:
+    plugin: dump
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.4.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source-type: deb
+
   kresd:
     plugin: dump
     source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.4.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
@@ -88,6 +94,8 @@ parts:
     - libluajit-5.1-2
     - libbpfcc
     - dns-root-data
+    - libfstrm0                         # Needed by dnstap
+    - libprotobuf-c1                    # Needed by dnstap
     - wget                              # Needed by deny-policy
     - lua-cqueues                       # Needed by deny-policy
     override-build: |
@@ -99,4 +107,11 @@ parts:
       ln -sf liblmdb.so.0.0.0 liblmdb.so
       ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
 
-    after: [libknot, libdnssec, libzscanner]
+    override-prime: |
+      snapcraftctl prime
+
+      rm -rf $SNAPCRAFT_PRIME/usr/share/doc
+      rm -rf $SNAPCRAFT_PRIME/usr/share/info
+      rm -rf $SNAPCRAFT_PRIME/usr/share/man
+
+    after: [libknot, libdnssec, libzscanner, dnstap]

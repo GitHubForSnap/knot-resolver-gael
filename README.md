@@ -15,7 +15,7 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 `sudo snap restart knot-resolver-gael.kresd`
 
 * Read the logs
-`journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
+`sudo journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
 
 **Deny domain resolution (refreshed every 4 hrs)**
 
@@ -48,7 +48,7 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 `sudo snap restart knot-resolver-gael.deny-policy`
 
 * Read the logs
-`journalctl --follow --lines 30 -u snap.knot-resolver-gael.deny-policy`
+`sudo journalctl --follow --lines 30 -u snap.knot-resolver-gael.deny-policy`
 
 * Add the deny policy list to kresd.conf
 `sudo vi /var/snap/knot-resolver-gael/current/kresd.conf`
@@ -61,7 +61,11 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 `sudo snap restart knot-resolver-gael.kresd`
 
 * Read the logs
-`journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
+`sudo journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
+
+**2021-08-16**
+
+* Added DNStap module. See [dnstap-gael](https://snapcraft.io/dnstap-gael)
 
 **2021-07-30**
 
