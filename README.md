@@ -63,6 +63,10 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Read the logs
 `sudo journalctl --follow --lines 30 -u snap.knot-resolver-gael.kresd`
 
+**2021-10-14**
+
+* Updated to v5.4.2
+
 **2021-08-22**
 
 * Updated to v5.4.1
