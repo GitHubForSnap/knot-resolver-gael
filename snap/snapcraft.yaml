@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.4.2
+version: 5.4.3
 base: core20
 summary: Knot Resolver
 description: |
@@ -35,6 +35,7 @@ apps:
   kresd:
     command: launcher/kresd.sh
     daemon: simple
+    install-mode: disable
     environment:
       LUA_PATH: $SNAP/usr/lib/knot-resolver/?.lua;$SNAP/usr/lib/knot-resolver/?/init.lua;$SNAP/./?.lua;$SNAP/usr/share/luajit-2.1.0-beta3/?.lua;$SNAP/usr/share/lua/5.1/?.lua;$SNAP/usr/share/lua/5.1/?/init.lua
       LUA_CPATH: $SNAP/usr/lib/knot-resolver/?.so;$SNAP/./?.so;$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/?.so;$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/lua/5.1/?.so
@@ -97,7 +98,7 @@ parts:
 
   dnstap:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.4.2-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.4.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libfstrm0
@@ -105,7 +106,7 @@ parts:
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.4.2-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.4.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libnghttp2-14
