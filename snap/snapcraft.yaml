@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.4.3
+version: 5.4.4
 base: core20
 summary: Knot Resolver
 description: |
@@ -51,6 +51,10 @@ apps:
     plugs:
       - network
 
+#  kres-cache-gc:
+#    command: usr/sbin/kres-cache-gc
+#    daemon: simple
+
 parts:
   launcher:
     plugin: dump
@@ -98,7 +102,7 @@ parts:
 
   dnstap:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.4.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.4.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libfstrm0
@@ -106,7 +110,7 @@ parts:
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.4.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.4.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libnghttp2-14
