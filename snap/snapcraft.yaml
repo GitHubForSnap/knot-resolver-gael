@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.5.1
+version: 5.5.1-20220727
 base: core20
 summary: Knot Resolver
 description: |
