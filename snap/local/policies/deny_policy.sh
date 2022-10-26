@@ -41,7 +41,7 @@ echo -e '@\tIN\tSOA\tlocalhost.\troot.localhost.\t(2 2w 2w 2w 2w)' >> $DENY_POLI
 echo -e '\tIN\tNS\tlocalhost.\n' >> $DENY_POLICY_NEW
 
 # Concatenate hosts and domains, remove duplicates, remove empty lines, create NXDOMAIN entries in DENY_POLICY_NEW
-cat $TMP_HOSTS $TMP_DOMAINS | sort -u | sed '/^[[:space:]]*$/d' | grep "[.]" | sed -e 's/.*/\0\tCNAME\t.\n*.\0\tCNAME\t./' >> $DENY_POLICY_NEW
+cat $TMP_HOSTS $TMP_DOMAINS | sort -u | sed '/^[[:space:]]*$/d' | grep "[.]" | sed -e 's/.*/\0\tCNAME\t.\n*.\0\tCNAME\t./' | tr -d '\r' >> $DENY_POLICY_NEW
 
 mv "$DENY_POLICY_NEW" "$DENY_POLICY"
 echo "$DENY_POLICY has been updated"
