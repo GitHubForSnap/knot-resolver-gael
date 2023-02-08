@@ -65,6 +65,11 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Read the logs
 `sudo snap logs -n 30 knot-resolver-gael.kresd`
 
+**2023-02-08**
+
+* Updated to v5.6.0
+* knot-resolver-gael will now use core22 as most of the users are on Ubuntu 22.04
+
 **2022-10-26**
 
 * Remove carriage returns in deny_policy.rpz

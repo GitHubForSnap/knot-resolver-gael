@@ -1,6 +1,6 @@
 name: knot-resolver-gael
-version: 5.5.3-20221026
-base: core20
+version: 5.6.0
+base: core22
 summary: Knot Resolver
 description: |
   Knot Resolver is a caching full resolver implementation written in C and LuaJIT, both a resolver library and a daemon. The core architecture is tiny and efficient, and provides a foundation and a state-machine like API for extensions. There are three modules built-in - iterator, validator, cache, and a few more are loaded by default. Most of the rich features are written in Lua(JIT) and C. Batteries are included, but optional.
@@ -102,7 +102,7 @@ parts:
 
   dnstap:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.5.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.6.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libfstrm0
@@ -110,7 +110,7 @@ parts:
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.5.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.6.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libnghttp2-14
@@ -118,6 +118,7 @@ parts:
       - libluajit-5.1-2
       - libbpfcc
       - dns-root-data
+      - libjemalloc2
     override-build: |
       snapcraftctl build
 
