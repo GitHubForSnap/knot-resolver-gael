@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.6.0
+version: 5.7.0
 base: core22
 summary: Knot Resolver
 description: |
@@ -77,7 +77,7 @@ parts:
       - etc/*
       - usr/*
     override-prime:
-      snapcraftctl prime
+      craftctl default
 
       rm -rf $SNAPCRAFT_PRIME/usr/share/doc
       rm -rf $SNAPCRAFT_PRIME/usr/share/info
@@ -102,7 +102,7 @@ parts:
 
   dnstap:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.6.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.7.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libfstrm0
@@ -110,7 +110,7 @@ parts:
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.6.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_20.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.7.0-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libnghttp2-14
@@ -120,7 +120,7 @@ parts:
       - dns-root-data
       - libjemalloc2
     override-build: |
-      snapcraftctl build
+      craftctl default
 
       rm $SNAPCRAFT_PART_INSTALL/lib/systemd/system/kresd.service
 
@@ -129,7 +129,7 @@ parts:
       ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
 
     override-prime: |
-      snapcraftctl prime
+      craftctl default
 
       rm -rf $SNAPCRAFT_PRIME/etc/knot-resolver
       rm -rf $SNAPCRAFT_PRIME/lib
