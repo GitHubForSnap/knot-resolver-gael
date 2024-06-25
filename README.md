@@ -69,7 +69,7 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 
 * Updated to v5.7.1
 * Fix for CVE-2023-50868: NSEC3 closest encloser proof can exhaust CPU
-* Fix fof CVE-2023-50387 "KeyTrap"
+* Fix for CVE-2023-50387 "KeyTrap"
 
 **2023-09-21**
 
