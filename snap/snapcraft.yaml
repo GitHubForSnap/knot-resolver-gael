@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: 5.7.1
+version: 5.7.3
 base: core22
 summary: Knot Resolver
 description: |
@@ -102,7 +102,7 @@ parts:
 
   dnstap:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.7.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.7.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libfstrm0
@@ -110,7 +110,7 @@ parts:
 
   kresd:
     plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.7.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.7.3-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
     source-type: deb
     stage-packages:
       - libnghttp2-14
