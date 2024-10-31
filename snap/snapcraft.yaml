@@ -1,6 +1,6 @@
 name: knot-resolver-gael
-version: 5.7.4
-base: core22
+version: "v5.7.4-core24"
+base: core24
 summary: Knot Resolver
 description: |
   Knot Resolver is a caching full resolver implementation written in C and LuaJIT, both a resolver library and a daemon. The core architecture is tiny and efficient, and provides a foundation and a state-machine like API for extensions. There are three modules built-in - iterator, validator, cache, and a few more are loaded by default. Most of the rich features are written in Lua(JIT) and C. Batteries are included, but optional.
@@ -15,11 +15,19 @@ description: |
 grade: stable
 confinement: strict
 
-architectures:
-  - build-on: arm64
-  - build-on: amd64
+platforms:
+  amd64:
+  arm64:
 
 license: "GPL-3.0"
+
+package-repositories:
+  - type: apt
+    components: [main]
+    suites: [noble]
+    key-id: 9C71D59CD4CE8BD2966A7A3EAB6A303124019B64
+    url: https://pkg.labs.nic.cz/knot-resolver
+    priority: always
 
 layout:
   /usr/lib/knot-resolver:               # Needed to workaround absolute paths in Knot Resolver
@@ -83,50 +91,53 @@ parts:
       rm -rf $SNAPCRAFT_PRIME/usr/share/info
       rm -rf $SNAPCRAFT_PRIME/usr/share/man
 
-  libknot:
-    plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libknot12_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-    source-type: deb
-    stage-packages:
-      - liblmdb0
+      #  libknot:
+      #    plugin: dump
+      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libknot12_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+      #    source-type: deb
+      #    stage-packages:
+      #      - liblmdb0
 
-  libdnssec:
-    plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libdnssec8_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-    source-type: deb
+      #  libdnssec:
+      #    plugin: dump
+      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libdnssec8_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+      #    source-type: deb
 
-  libzscanner:
-    plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner4_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-    source-type: deb
+      #  libzscanner:
+      #    plugin: dump
+      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner4_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+      #    source-type: deb
 
-  dnstap:
-    plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.7.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-    source-type: deb
-    stage-packages:
-      - libfstrm0
-      - libprotobuf-c1
+      #  dnstap:
+      #    plugin: dump
+      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.7.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+      #    source-type: deb
+      #    stage-packages:
+      #      - libfstrm0
+      #      - libprotobuf-c1
 
   kresd:
-    plugin: dump
-    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.7.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-    source-type: deb
+    plugin: nil
+    #    plugin: dump
+    #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.7.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
+    #    source-type: deb
     stage-packages:
-      - libnghttp2-14
-      - libuv1
-      - libluajit-5.1-2
-      - libbpfcc
-      - dns-root-data
-      - libjemalloc2
-    override-build: |
-      craftctl default
+      #      - libnghttp2-14
+      #      - libuv1
+      #      - libluajit-5.1-2
+      #      - libbpfcc
+      #      - dns-root-data
+      #      - libjemalloc2
+      - knot-resolver
+      - knot-module-dnstap
+        #    override-build: |
+        #      craftctl default
 
-      rm $SNAPCRAFT_PART_INSTALL/lib/systemd/system/kresd.service
+        #      rm $SNAPCRAFT_PART_INSTALL/lib/systemd/system/kresd.service
 
-      cd $SNAPCRAFT_PART_INSTALL/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
-      ln -sf liblmdb.so.0.0.0 liblmdb.so
-      ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
+        #      cd $SNAPCRAFT_PART_INSTALL/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
+        #      ln -sf liblmdb.so.0.0.0 liblmdb.so
+        #      ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
 
     override-prime: |
       craftctl default
@@ -137,4 +148,4 @@ parts:
       rm -rf $SNAPCRAFT_PRIME/usr/share/doc
       rm -rf $SNAPCRAFT_PRIME/usr/share/man
 
-    after: [libknot, libdnssec, libzscanner, dnstap]
+#    after: [libknot, libdnssec, libzscanner, dnstap]
