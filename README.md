@@ -65,6 +65,10 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Read the logs
 `sudo snap logs -n 30 knot-resolver-gael.kresd`
 
+**2024-10-31**
+
+* knot-resolver-gael will now use core24 as most users are on Ubuntu 24.04
+
 **2024-08-14**
 
 * Updated to v5.7.4
@@ -86,7 +90,7 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 **2023-02-08**
 
 * Updated to v5.6.0
-* knot-resolver-gael will now use core22 as most of the users are on Ubuntu 22.04
+* knot-resolver-gael will now use core22 as most users are on Ubuntu 22.04
 
 **2022-10-26**
 
