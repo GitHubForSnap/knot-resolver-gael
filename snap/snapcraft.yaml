@@ -1,5 +1,5 @@
 name: knot-resolver-gael
-version: "v5.7.4-core24"
+version: "v5.7.4-20241117"
 base: core24
 summary: Knot Resolver
 description: |
@@ -21,6 +21,7 @@ platforms:
 
 license: "GPL-3.0"
 
+# Add the official package repository
 package-repositories:
   - type: apt
     components: [main]
@@ -46,7 +47,7 @@ apps:
     install-mode: disable
     environment:
       LUA_PATH: $SNAP/usr/lib/knot-resolver/?.lua;$SNAP/usr/lib/knot-resolver/?/init.lua;$SNAP/./?.lua;$SNAP/usr/share/luajit-2.1.0-beta3/?.lua;$SNAP/usr/share/lua/5.1/?.lua;$SNAP/usr/share/lua/5.1/?/init.lua
-      LUA_CPATH: $SNAP/usr/lib/knot-resolver/?.so;$SNAP/./?.so;$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/?.so;$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/lua/5.1/?.so
+      LUA_CPATH: $SNAP/usr/lib/knot-resolver/?.so;$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/?.so;$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/lua/5.1/?.so
     plugs:
       - network
       - network-bind
@@ -55,6 +56,7 @@ apps:
   deny-policy:
     command: policies/deny_policy.sh    # Rebuild the deny list every 4 hrs
     daemon: simple
+    install-mode: disable
     timer: 00:00-24:00/6
     plugs:
       - network
@@ -87,65 +89,21 @@ parts:
     override-prime:
       craftctl default
 
-      rm -rf $SNAPCRAFT_PRIME/usr/share/doc
-      rm -rf $SNAPCRAFT_PRIME/usr/share/info
-      rm -rf $SNAPCRAFT_PRIME/usr/share/man
-
-      #  libknot:
-      #    plugin: dump
-      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libknot12_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-      #    source-type: deb
-      #    stage-packages:
-      #      - liblmdb0
-
-      #  libdnssec:
-      #    plugin: dump
-      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libdnssec8_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-      #    source-type: deb
-
-      #  libzscanner:
-      #    plugin: dump
-      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/libzscanner4_3.1.1-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-      #    source-type: deb
-
-      #  dnstap:
-      #    plugin: dump
-      #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver-module-dnstap_5.7.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-      #    source-type: deb
-      #    stage-packages:
-      #      - libfstrm0
-      #      - libprotobuf-c1
+      rm -rf $CRAFT_PRIME/usr/share/doc
+      rm -rf $CRAFT_PRIME/usr/share/info
+      rm -rf $CRAFT_PRIME/usr/share/man
 
   kresd:
     plugin: nil
-    #    plugin: dump
-    #    source: https://download.opensuse.org/repositories/home:/CZ-NIC:/knot-resolver-latest/xUbuntu_22.04/${SNAPCRAFT_TARGET_ARCH}/knot-resolver_5.7.4-cznic.1_${SNAPCRAFT_TARGET_ARCH}.deb
-    #    source-type: deb
     stage-packages:
-      #      - libnghttp2-14
-      #      - libuv1
-      #      - libluajit-5.1-2
-      #      - libbpfcc
-      #      - dns-root-data
-      #      - libjemalloc2
       - knot-resolver
-      - knot-module-dnstap
-        #    override-build: |
-        #      craftctl default
-
-        #      rm $SNAPCRAFT_PART_INSTALL/lib/systemd/system/kresd.service
-
-        #      cd $SNAPCRAFT_PART_INSTALL/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
-        #      ln -sf liblmdb.so.0.0.0 liblmdb.so
-        #      ln -sf libbcc_bpf.so.0.12.0 libbpf.so.0
+      - knot-resolver-module-dnstap
 
     override-prime: |
       craftctl default
 
-      rm -rf $SNAPCRAFT_PRIME/etc/knot-resolver
-      rm -rf $SNAPCRAFT_PRIME/lib
-      rm -rf $SNAPCRAFT_PRIME/usr/lib/tmpfiles.d
-      rm -rf $SNAPCRAFT_PRIME/usr/share/doc
-      rm -rf $SNAPCRAFT_PRIME/usr/share/man
-
-#    after: [libknot, libdnssec, libzscanner, dnstap]
+      rm -rf $CRAFT_PRIME/etc/knot-resolver
+      rm -rf $CRAFT_PRIME/lib
+      rm -rf $CRAFT_PRIME/usr/lib/tmpfiles.d
+      rm -rf $CRAFT_PRIME/usr/share/doc
+      rm -rf $CRAFT_PRIME/usr/share/man

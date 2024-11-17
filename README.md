@@ -65,6 +65,11 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 * Read the logs
 `sudo snap logs -n 30 knot-resolver-gael.kresd`
 
+**2024-11-17**
+
+* Fixed automatic policy refresh (incorrect architecture environment variable)
+* Fixed dnstap module dependency
+
 **2024-10-31**
 
 * knot-resolver-gael will now use core24 as most users are on Ubuntu 24.04
