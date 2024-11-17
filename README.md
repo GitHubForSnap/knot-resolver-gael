@@ -46,8 +46,8 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
    https://v.firebog.net/hosts/Easyprivacy.txt
 ```
 
-* Restart deny policy
-`sudo snap restart knot-resolver-gael.deny-policy`
+* Restart and enable deny policy
+`sudo snap start --enable knot-resolver-gael.deny-policy`
 
 * Read the logs
 `sudo snap logs -n 30 knot-resolver-gael.deny-policy`
@@ -69,6 +69,7 @@ The LuaJIT modules, support DNS privacy and DNSSEC, and persistent cache with lo
 
 * Fixed automatic policy refresh (incorrect architecture environment variable)
 * Fixed dnstap module dependency
+* Fixed documentation
 
 **2024-10-31**
 
