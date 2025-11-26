@@ -98,6 +98,7 @@ parts:
     stage-packages:
       - knot-resolver
       - knot-resolver-module-dnstap
+      - knot-resolver-module-http
 
     override-prime: |
       craftctl default
