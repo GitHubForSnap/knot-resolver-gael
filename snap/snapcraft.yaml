@@ -31,10 +31,12 @@ package-repositories:
     priority: always
 
 layout:
-  /usr/lib/knot-resolver:               # Needed to workaround absolute paths in Knot Resolver
+  /usr/lib/knot-resolver:               # Needed to work around absolute paths in Knot Resolver
     bind: $SNAP/usr/lib/knot-resolver
-  /usr/share/dns:                       # Needed to workaround absolute paths in Knot Resolver
+  /usr/share/dns:                       # Needed to work around absolute paths in Knot Resolver
     bind: $SNAP/usr/share/dns
+  /usr/share/javascript:                # Needed to work around absolute paths in Knot Resolver http module
+    bind: $SNAP/usr/share/javascript
   /var/cache:                           # Needed to enable write access to the cache
     bind: $SNAP_DATA/var/cache
   /etc/wgetrc:                          # Needed by wget
@@ -61,10 +63,6 @@ apps:
     plugs:
       - network
 
-#  kres-cache-gc:
-#    command: usr/sbin/kres-cache-gc
-#    daemon: simple
-
 parts:
   launcher:
     plugin: dump
@@ -79,19 +77,13 @@ parts:
     source: snap/local/policies
     stage-packages:
       - wget
-      - lua-cqueues
     organize:
       'deny_policy.sh' : policies/
-    stage:
-      - policies/deny_policy.sh
-      - etc/*
-      - usr/*
-    override-prime:
-      craftctl default
-
-      rm -rf $CRAFT_PRIME/usr/share/doc
-      rm -rf $CRAFT_PRIME/usr/share/info
-      rm -rf $CRAFT_PRIME/usr/share/man
+    prime:
+      - etc/wgetrc
+      - usr/bin
+      - usr/lib
+      - policies
 
   kresd:
     plugin: nil
@@ -99,12 +91,16 @@ parts:
       - knot-resolver
       - knot-resolver-module-dnstap
       - knot-resolver-module-http
+      - lua-cqueues                             # Used to reload policies
+    prime:
+      - usr/lib
+      - -usr/lib/tmpfiles.d
+      - usr/sbin
+      - usr/share/dns
+      - usr/share/fonts
+      - usr/share/fonts-glyphicons
+      - usr/share/javascript
+      - usr/share/lintian
+      - usr/share/lua
+      - usr/share/luajit-2.1
 
-    override-prime: |
-      craftctl default
-
-      rm -rf $CRAFT_PRIME/etc/knot-resolver
-      rm -rf $CRAFT_PRIME/lib
-      rm -rf $CRAFT_PRIME/usr/lib/tmpfiles.d
-      rm -rf $CRAFT_PRIME/usr/share/doc
-      rm -rf $CRAFT_PRIME/usr/share/man
